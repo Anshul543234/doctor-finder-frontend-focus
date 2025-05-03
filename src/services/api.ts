@@ -10,6 +10,7 @@ export const fetchDoctors = async (
     fees?: number;
     availability?: string;
     specialty?: string;
+    name?: string;
   } = {}
 ): Promise<{ doctors: Doctor[]; total: number; page: number; pageSize: number; totalPages: number }> => {
   // In a real app, this would be an API call to your backend
@@ -26,6 +27,12 @@ export const fetchDoctors = async (
       if (filters.specialty) {
         results = results.filter(doctor => 
           doctor.specialty.toLowerCase().includes(filters.specialty.toLowerCase())
+        );
+      }
+      
+      if (filters.name) {
+        results = results.filter(doctor => 
+          doctor.name.toLowerCase().includes(filters.name.toLowerCase())
         );
       }
       
