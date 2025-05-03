@@ -10,6 +10,7 @@ interface FetchDoctorsParams {
   fees?: number;
   availability?: string;
   specialty?: string;
+  name?: string;
 }
 
 interface DoctorsResponse {
@@ -31,6 +32,7 @@ export const fetchDoctors = async (params: FetchDoctorsParams = {}): Promise<Doc
     if (params.fees) queryParams.append('fees', params.fees.toString());
     if (params.availability) queryParams.append('availability', params.availability);
     if (params.specialty) queryParams.append('specialty', params.specialty);
+    if (params.name) queryParams.append('name', params.name);
 
     const url = `${API_URL}/doctors${queryParams.toString() ? '?' + queryParams.toString() : ''}`;
     
@@ -45,7 +47,8 @@ export const fetchDoctors = async (params: FetchDoctorsParams = {}): Promise<Doc
             experience: params.experience,
             fees: params.fees,
             availability: params.availability,
-            specialty: params.specialty
+            specialty: params.specialty,
+            name: params.name
           }
         );
       });
