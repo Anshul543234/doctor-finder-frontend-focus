@@ -11,7 +11,7 @@ export const fetchDoctors = async (
     availability?: string;
     specialty?: string;
   } = {}
-): Promise<{ doctors: Doctor[]; total: number }> => {
+): Promise<{ doctors: Doctor[]; total: number; page: number; pageSize: number; totalPages: number }> => {
   // In a real app, this would be an API call to your backend
   return new Promise((resolve) => {
     // Simulate network delay
@@ -46,10 +46,14 @@ export const fetchDoctors = async (
       const start = (page - 1) * pageSize;
       const end = start + pageSize;
       const paginatedResults = results.slice(start, end);
+      const totalPages = Math.ceil(total / pageSize);
       
       resolve({
         doctors: paginatedResults,
-        total
+        total,
+        page,
+        pageSize,
+        totalPages
       });
     }, 500);
   });
