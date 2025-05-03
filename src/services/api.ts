@@ -47,6 +47,8 @@ export const fetchDoctors = async (
           results = results.filter(doctor => doctor.fees > 1000);
         }
       }
+
+      
       
       // Calculate pagination
       const total = results.length;
